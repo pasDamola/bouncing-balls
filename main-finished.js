@@ -5,6 +5,8 @@ const ctx = canvas.getContext('2d');
 
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
+console.log(width);
+console.log(height);
 
 // function to generate random number
 
@@ -13,13 +15,19 @@ function random(min,max) {
   return num;
 }
 
-// define Ball constructor
-
-function Ball(x, y, velX, velY, color, size) {
+// define Shape constructor
+function Shape(x, y, velX, velY, exists){
   this.x = x;
   this.y = y;
   this.velX = velX;
   this.velY = velY;
+  this.exists = exists;
+}
+
+// define Ball constructor
+
+function Ball(x, y, velX, velY, exists, color, size) {
+  Shape.call(this, x, y, velX, velY, exists)
   this.color = color;
   this.size = size;
 }
@@ -85,6 +93,7 @@ while(balls.length < 25) {
     random(0 + size,height - size),
     random(-7,7),
     random(-7,7),
+    true,
     'rgb(' + random(0,255) + ',' + random(0,255) + ',' + random(0,255) +')',
     size
   );
