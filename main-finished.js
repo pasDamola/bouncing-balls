@@ -32,6 +32,13 @@ function Ball(x, y, velX, velY, exists, color, size) {
   this.size = size;
 }
 
+// define EvilCircle Constructor
+function EvilCircle(x, y, velX, velY, exists, color, size){
+  Shape.call(this, x, y, 20, 20, exists)
+  this.color = 'white';
+  this.size = 10;
+}
+
 // define ball draw method
 
 Ball.prototype.draw = function() {
@@ -79,6 +86,39 @@ Ball.prototype.collisionDetect = function() {
     }
   }
 };
+
+
+// define EvilCircle draw method
+EvilCircle.prototype.draw = function() {
+  ctx.beginPath();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = this.color;
+  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+  ctx.stroke();
+};
+
+// define EvilCircle checkbounds method
+Ball.prototype.checkBounds = function() {
+  if((this.x + this.size) >= width) {
+    this.velX = -(this.velX);
+  }
+
+  if((this.x - this.size) <= 0) {
+    this.velX = -(this.velX);
+  }
+
+  if((this.y + this.size) >= height) {
+    this.velY = -(this.velY);
+  }
+
+  if((this.y - this.size) <= 0) {
+    this.velY = -(this.velY);
+  }
+
+  this.x += this.velX;
+  this.y += this.velY;
+};
+
 
 // define array to store balls and populate it
 
